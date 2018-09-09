@@ -1,0 +1,26 @@
+main {
+    display: grid;
+    grid-template-rows: 100px 1fr;
+    grid-template-columns: 200px 1fr;
+    height: 100vh;
+}
+
+section {
+    grid-row: span 1;
+    grid-column: span 1;
+    padding: 20px 30px;
+    box-sizing: border-box;
+}
+
+#header {
+    background: blue;
+}
+
+#side-menu {
+    background: grey;
+    grid-row: span 2;
+}
+
+#content {
+    background: white;
+}
