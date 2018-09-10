@@ -29,7 +29,6 @@ const employeeList = [
       officeNum: 213,
       phoneNum: '789-766-5675'
     },
-    ,
     {
       name: 'Ty',
       officeNum: 211,
