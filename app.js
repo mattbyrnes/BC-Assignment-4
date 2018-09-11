@@ -31,12 +31,12 @@ const viewVerify = event => {
     `);
   function runVerify() {
     $('#output').empty();
-    $('#output').append(`<p>False</p>`);
+    $('#output').append(`<p>No, this is not an employee.</p>`);
     let userInput = document.querySelectorAll('#inputName')[0].value;
     for (i = 0; i < employeeList.length; i++) {
       if (userInput === employeeList[i].name.toLowerCase()) {
         $('#output').empty();
-        $('#output').append(`<p>True</p>`);
+        $('#output').append(`<p>Yes, ${userInput} is an employee.</p>`);
       }
     }
   };
@@ -59,9 +59,9 @@ const viewLookup = event => {
     for (let i = 0; i < employeeList.length; i++) {
       if (userInput === employeeList[i].name.toLowerCase()) {
         $('#output').empty();
-        $('#output').append(`Name: ${employeeList[i].name}`);
-        $('#output').append(`Office Number: ${employeeList[i].officeNum}`);
-        $('#output').append(`Phone Number: ${employeeList[i].phoneNum}`);
+        $('#output').append(`<p>Name: ${employeeList[i].name}</p>`);
+        $('#output').append(`<p>Office: ${employeeList[i].officeNum}</p>`);
+        $('#output').append(`<p>Phone: ${employeeList[i].phoneNum}</p>`);
       }
     }
   }
@@ -84,9 +84,9 @@ const viewContains = event => {
     let userInput = document.querySelectorAll('#inputName')[0].value;
     for (i = 0; i < employeeList.length; i++) {
       if (employeeList[i].name.toLowerCase().includes(userInput)) {
-        $('#output').append(`Name: ${employeeList[i].name}`);
-        $('#output').append(`Office Number: ${employeeList[i].officeNum}`);
-        $('#output').append(`Phone Number: ${employeeList[i].phoneNum}`);
+        $('#output').append(`<p>Name: ${employeeList[i].name}</p>`);
+        $('#output').append(`<p>Office Number: ${employeeList[i].officeNum}</p>`);
+        $('#output').append(`<p>Phone Number: ${employeeList[i].phoneNum}</p><hr />`);
       }
     }
   }
@@ -114,10 +114,10 @@ const viewAdd = event => {
   $('#content').append(`
       <h1>Add</h1>
       <p>ADD a new employee</p>
-      <input id="newName" type="text">
-      <input id="newOffice" type="text">
-      <input id="newPhone" type="text">
-      <button id="submit-add">Add</button>
+      <p>Name: <input id="newName" type="text"></p>
+      <p>Office: <input id="newOffice" type="text"></p>
+      <p>Phone: <input id="newPhone" type="text"></p>
+      <button id="submit-add">Add</button></p>
     `);
     $('#submit-add').on('click', runAdd);
 };
@@ -131,9 +131,8 @@ function runDelete() {
     if (userInput === employeeList[i].name.toLowerCase()) {
       employeeList.splice(i, 1);
     }
-    // $('#output').empty();
+    $('#message').append(`${userInput} has been deleted.`);
     runPrint();
-    $('#output').append(`${userInput} has been deleted.`);
   }
 }
 

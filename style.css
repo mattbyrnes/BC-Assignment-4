@@ -5,7 +5,7 @@ body {
 
 main {
     display: grid;
-    grid-template-rows: auto 1fr 1fr;
+    grid-template-rows: auto auto 1fr;
     grid-template-columns: 200px 1fr;
     height: 100vh;
 }
@@ -45,6 +45,7 @@ section {
 
 #content {
     background: white;
+    border-bottom: 1px solid #eee;
 }
 
 #content h1 {
@@ -71,4 +72,9 @@ input {
     background: #eee; */
     width: auto;
     height: auto;
+}
+
+#output p {
+    margin: 10px auto;
+    display: block;
 }
