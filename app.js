@@ -1,26 +1,30 @@
 //Print
+function runPrint() {
+  $('#output').empty();
+  for (i = 0; i < employeeList.length; i++) {
+    $('#output').append(`<p>Name: ${employeeList[i].name}</p>`);
+    $('#output').append(`<p>Office Number: ${employeeList[i].officeNum}</p>`);
+    $('#output').append(`<p>Phone Number: ${employeeList[i].phoneNum}</p><br />`);
+  }
+};
+
 const viewPrint = event => {
-  $('#content').empty();
+  $('#content, #output').empty();
   $('#content').append(`
-      <p>View all employees</p>
+      <h1>Print</h1>
+      <p>PRINT all employees</p>
       <button id="submit-print">Print</button>
     `);
-  function runPrint() {
-    $('#output').empty();
-    for (i = 0; i < employeeList.length; i++) {
-      $('#output').append(`Name: ${employeeList[i].name}`);
-      $('#output').append(`Office Number: ${employeeList[i].officeNum}`);
-      $('#output').append(`Phone Number: ${employeeList[i].phoneNum}`);
-    }
-  };
-  $('#submit-print').on('click', runPrint);
+    $('#submit-print').on('click', runPrint);
 };
 $('#menu-print').on('click', viewPrint);
 
+
 //Verify
 const viewVerify = event => {
-  $('#content').empty();
+  $('#content, #output').empty();
   $('#content').append(`
+      <h1>Verify</h1>
       <p>Enter the name to VERIFY</p>
       <input id="inputName" type="text">
       <button id="submit-verify">Verify</button>
@@ -28,13 +32,11 @@ const viewVerify = event => {
   function runVerify() {
     $('#output').empty();
     $('#output').append(`<p>False</p>`);
-    console.log(`Hello False`);
     let userInput = document.querySelectorAll('#inputName')[0].value;
     for (i = 0; i < employeeList.length; i++) {
       if (userInput === employeeList[i].name.toLowerCase()) {
         $('#output').empty();
         $('#output').append(`<p>True</p>`);
-        console.log(`Hello True`);
       }
     }
   };
@@ -44,82 +46,107 @@ $('#menu-verify').on('click', viewVerify);
 
 //Lookup
 const viewLookup = event => {
-  $('#content').empty();
+  $('#content, #output').empty();
   $('#content').append(`
+      <h1>Lookup</h1>
       <p>Enter the name to LOOKUP</p>
       <input id="inputName" type="text">
       <button id="submit-lookup">Lookup</button>
     `);
-    function runLookup() {
-      $('#output').empty();
-      $('#output').append(`<p>Employee Not Found</p>`);
-      console.log(`Hello - Employee Not Found`);
-      let userInput = document.querySelectorAll('#inputName')[0].value;
-      for (let i = 0; i < employeeList.length; i++) {
-        if (userInput === employeeList[i].name.toLowerCase()) {
-          $('#output').empty();
-          $('#output').append(`Name: ${employeeList[i].name}`);
-          $('#output').append(`Office Number: ${employeeList[i].officeNum}`);
-          $('#output').append(`Phone Number: ${employeeList[i].phoneNum}`);
-        }
+  function runLookup() {
+    $('#output').append(`<p>Employee Not Found</p>`);
+    let userInput = document.querySelectorAll('#inputName')[0].value;
+    for (let i = 0; i < employeeList.length; i++) {
+      if (userInput === employeeList[i].name.toLowerCase()) {
+        $('#output').empty();
+        $('#output').append(`Name: ${employeeList[i].name}`);
+        $('#output').append(`Office Number: ${employeeList[i].officeNum}`);
+        $('#output').append(`Phone Number: ${employeeList[i].phoneNum}`);
       }
     }
+  }
   $('#submit-lookup').on('click', runLookup);
-  $('#inputName').on('keyup', runLookup);
 };
 $('#menu-lookup').on('click', viewLookup);
 
 //Contains
 const viewContains = event => {
-  $('#content').empty();
+  $('#content, #output').empty();
   $('#content').append(`
+      <h1>Contains</h1>
       <p>Employee name CONTAINS what letters?</p>
       <input id="inputName" type="text">
       <button id="submit-contains">Contains</button>
     `);
-    function runContains() {
-      $('#output').empty();
-      $('#output').append(`<p>Employee Not Found</p>`);
-      console.log(`Hello - Employee Not Found`);
-      let userInput = document.querySelectorAll('#inputName')[0].value;
-      for (i = 0; i < employeeList.length; i++) {
-        if (employeeList[i].name.toLowerCase().includes(userInput)) {
-          $('#output').empty();
-          $('#output').append(`Name: ${employeeList[i].name}`);
-          $('#output').append(`Office Number: ${employeeList[i].officeNum}`);
-          $('#output').append(`Phone Number: ${employeeList[i].phoneNum}`);
-        }
+  function runContains() {
+    $('#output').append(`<p>Employee Not Found</p>`);
+    $('#output').empty();
+    let userInput = document.querySelectorAll('#inputName')[0].value;
+    for (i = 0; i < employeeList.length; i++) {
+      if (employeeList[i].name.toLowerCase().includes(userInput)) {
+        $('#output').append(`Name: ${employeeList[i].name}`);
+        $('#output').append(`Office Number: ${employeeList[i].officeNum}`);
+        $('#output').append(`Phone Number: ${employeeList[i].phoneNum}`);
       }
     }
+  }
   $('#submit-contains').on('click', runContains);
-  $('#inputName').on('keyup', runContains);
 };
 $('#menu-contains').on('click', viewContains);
 
 //Update//////////////////////////
 
-//Add
+//Add Section
+
+const runAdd = event => {
+  let nameAdd = document.querySelectorAll('#newName')[0].value;
+  let officeAdd = document.querySelectorAll('#newOffice')[0].value;
+  let phoneAdd = document.querySelectorAll('#newPhone')[0].value;
+  var employeeAdd = { name: nameAdd, officeNum: officeAdd, phoneNum: phoneAdd };
+  employeeList.push(employeeAdd);
+  $('#output').empty();
+  $('#output').append(`${nameAdd} has been added.<br /><br />`);
+  runPrint();
+};
+
 const viewAdd = event => {
-  $('#content').empty();
+  $('#content, #output').empty();
   $('#content').append(`
+      <h1>Add</h1>
       <p>ADD a new employee</p>
       <input id="newName" type="text">
       <input id="newOffice" type="text">
       <input id="newPhone" type="text">
       <button id="submit-add">Add</button>
     `);
-    function runAdd() {
-      let nameAdd = document.querySelectorAll('#newName')[0].value;
-      let officeAdd = document.querySelectorAll('#newOffice')[0].value;
-      let phoneAdd = document.querySelectorAll('#newPhone')[0].value;
-      var employeeAdd = { name: nameAdd, officeNum: officeAdd, phoneNum: phoneAdd };
-      employeeList.push(employeeAdd);
-      $('#output').empty();
-      $('#output').append(`${nameAdd} has been added.`);
-     
-      // runPrint();
-    };
-  $('#submit-add').on('click', runAdd).on('click', runPrint);
+    $('#submit-add').on('click', runAdd);
 };
 $('#menu-add').on('click', viewAdd);
+
+
+//Delete
+function runDelete() {
+  let userInput = document.querySelectorAll('#deleteName')[0].value;
+  for (i = 0; i < employeeList.length; i++) {
+    if (userInput === employeeList[i].name.toLowerCase()) {
+      employeeList.splice(i, 1);
+    }
+    // $('#output').empty();
+    runPrint();
+    $('#output').append(`${userInput} has been deleted.`);
+  }
+}
+
+const viewDelete = event => {
+  $('#content, #output').empty();
+  $('#content').append(`
+      <h1>Delete</h1>
+      <p>DELETE an employee</p>
+      <input id="deleteName" type="text">
+      <button id="submit-delete">Delete</button>
+    `);
+  $('#submit-delete').on('click', runDelete);
+};
+
+$('#menu-delete').on('click', viewDelete);
 

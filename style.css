@@ -1,6 +1,11 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0px;
+}
+
 main {
     display: grid;
-    grid-template-rows: 100px 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr;
     grid-template-columns: 200px 1fr;
     height: 100vh;
 }
@@ -16,18 +21,54 @@ section {
     background: blue;
 }
 
+#header h1 {
+    color: #fff;
+    float: right;
+    font-size: 28px;
+}
+
 #side-menu {
     background: grey;
     grid-row: span 3;
+}
+
+#side-menu a {
+    color: #fff;
+    margin: 10px auto;
+    display: block;
+}
+
+#side-menu a:hover {
+    color: yellow;
+    cursor: pointer;
 }
 
 #content {
     background: white;
 }
 
+#content h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#content p {
+    margin: 10px auto;
+    display: block;
+}
+
+input {
+    border: 2px solid #ddd;
+    border-radius: 20px;
+    font-size: 16px;
+    padding: 8px 10px;
+    width: 500px;
+
+}
+
 #output {
-    color: red;
-    background: #eee;
-    width: 300px;
-    height: 200px;
+    /* color: red;
+    background: #eee; */
+    width: auto;
+    height: auto;
 }
